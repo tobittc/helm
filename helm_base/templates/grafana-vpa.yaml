@@ -1,0 +1,13 @@
+{{- if .Values.verticalPodAutoscaling.enabled }}
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ include "common.names.fullname" . }}
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       StatefulSet
+    name:       {{ include "common.names.fullname" . }}
+  updatePolicy:
+    updateMode: "Auto"
+{{- end }}
